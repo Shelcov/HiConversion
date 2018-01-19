@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p>Неверные введенные данные! Попробуйте ещё раз!</p>
+    {% endif %}
+
+        {% if user.is_authenticated %}
+            <p>Вы авторизированы.</p>
+        {% else %}
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>{{ form.username.label_tag }}</td>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password.label_tag }}</td>
+                        <td>{{ form.password }}</td>
+                    </tr>
+                </table>
+                <input style="margin: 15px 0px 0px 70px" type="submit" class="btn btn-default" value="Войти" />
+                <a href="{% url 'register' %}" style="margin-top: 15px" class="btn btn-default">Регистрация</a>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        {% endif %}
+
+
+
+
+{% endblock %}

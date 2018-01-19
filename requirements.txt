@@ -1,0 +1,2 @@
+Django==2.0.1
+short-url==1.2.2

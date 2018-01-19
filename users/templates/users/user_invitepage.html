@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h3>Отправить приглашение:</h3><br />
+    <form method="post">{% csrf_token %}
+        <div class="input-group col-lg-6">
+            <input type="text" class="form-control" placeholder="Введите Email" name="Email">
+            <div class="input-group-btn">
+                <input class="btn btn-default" type="submit" name="Enter" value="Отправить" />
+            </div>
+        </div>
+        <h3>Отправленные приглашения: </h3><br />
+        {% for item in sent_invite %}
+            <b>Пользователь:</b> {{ item.user.username }} <b>Email</b> {{ item.email }} <b>URL:</b> {{ item.url }}
+            <b>Ответ:</b> {{ item.status }}
+            {% if item.status %}
+                <b>Приглашенный пользователь:</b> {{ item.user_invite.username }}
+            {% endif %}<br />
+        {% endfor %}
+    </form>
+{% endblock %}
